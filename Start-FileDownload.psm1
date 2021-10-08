@@ -3,7 +3,8 @@ function Start-FileDownload {
         $url, 
         $targetPath = "$env:userprofile\download",
         $bufferSize = 10KB,
-        [switch]$Overwrite
+        [switch]$Overwrite,
+        [switch]$Silent
     )
 
     $Filename = [System.IO.Path]::GetFileName($url)
@@ -49,7 +50,9 @@ function Start-FileDownload {
             status =  "Downloaded ( $downloadedBytes of $($ContentLength) Bytes ): " 
             PercentComplete =  ( ($downloadedBytes / $ContentLength)  * 100 )
         }
-        Write-Progress @WriteProgressParams -ErrorAction SilentlyContinue
+        if (!($Silent)) {
+            Write-Progress @WriteProgressParams -ErrorAction SilentlyContinue
+        }
    }
     $targetStream.Flush()
     $targetStream.Close()
