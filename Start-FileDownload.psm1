@@ -27,7 +27,7 @@ function Start-FileDownload {
         {$_ -le 12} { $Unit = 'GB' }
         {$_ -le 9} { $Unit = 'MB' }
         {$_ -le 6} { $Unit = 'KB' }
-        {$_ -le 3} { $Unit = 'B' }
+        {$_ -le 3} { $Unit = $null }
         Default {"This file is too powerful"}
     }
 
