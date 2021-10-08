@@ -49,7 +49,7 @@ function Start-FileDownload {
             status =  "Downloaded ( $downloadedBytes of $($ContentLength) Bytes ): " 
             PercentComplete =  ( ($downloadedBytes / $ContentLength)  * 100 )
         }
-        Write-Progress @WriteProgressParams
+        Write-Progress @WriteProgressParams -ErrorAction SilentlyContinue
    }
     $targetStream.Flush()
     $targetStream.Close()
